@@ -33,8 +33,28 @@ class LinkedList
 	public def_type TraverseForward(int index)
 	{
 		Elemente<def_type> CurrentElement = head;
-		for(int x = 0; x <= index; x++)
+		for (int x = 0; x <= index; x++)
+		{
+			if (CurrentElement->next != nullptr)
+			{
+				CurrentElement = CurrentElement->next;
+			}
+		}
+		return CurrentElement->data;
 	}
+	public def_type TraverseBackward(int index)
+	{
+		Elemente<def_type> CurrentElement = tail;
+		for (int x = 0; x < index; x++)
+		{
+			if (CurrentElement->prev != nullptr)
+			{
+				CurrentElement = CurrentElement->prev;
+			}
+		}
+		return CurrentElement->data;
+	}
+
 
 	/*
 	

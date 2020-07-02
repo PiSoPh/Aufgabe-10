@@ -8,6 +8,7 @@ class Elemente
 
     def_type data; // information in node
     Elemente* next; //points to next element/node
+    Elemente* prev;
 };
 
 template<class def_type>
