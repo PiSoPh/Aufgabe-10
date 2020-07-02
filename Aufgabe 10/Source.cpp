@@ -23,3 +23,61 @@ kommt es zu einem zyklischen Verweis!
 
 
 */
+
+#include "Elemente.h"
+#include "LinkedList.h"
+
+#include <memory>
+#include <iostream>
+
+int main()
+{
+	std::unique_ptr<LinkedList<int>> list = std::make_unique<LinkedList<int>>();
+
+	list->append(2);
+	list->append(5);
+	list->append(8);
+	list->append(1);
+	list->append(4);
+	list->append(3);
+
+	//Aufgabe 10.2
+
+	std::cout << "Forward Traverse:" << std::endl;
+
+	for (int x = 0; x < (list->index); x++)
+	{
+		std::cout << " " << list->TraverseForward(x);
+	}
+
+
+	//Aufgabe 10.3.
+	std::cout << "\nBackward Traverse" << std::endl;
+	for (int j = 0; j < (list->index); j++)
+	{
+		std::cout << " " << list->TraverseBackward(j);
+	}
+
+	std::unique_ptr<LinkedList<std::string>> strList = std::make_unique<LinkedList<std::string>>();
+
+	strList->append("P");
+	strList->append("3");
+	strList->append("N");
+	strList->append("1");
+	strList->append("5");
+
+	std::cout << "\nForward Traverse:" << std::endl;
+
+	for (int x = 0; x < (strList->index); x++)
+	{
+		std::cout << " " << strList->TraverseForward(x);
+	}
+
+
+	//Aufgabe 10.3.
+	std::cout << "\nBackward Traverse" << std::endl;
+	for (int j = 0; j < (strList->index); j++)
+	{
+		std::cout << " " << strList->TraverseBackward(j);
+	}
+}

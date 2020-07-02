@@ -1,58 +1,65 @@
 #pragma once
-#include "Elemente.h"
+
 #include <memory>
+#include "Elemente.h"
 
 template <class def_type>
 class LinkedList
 {
+	std::shared_ptr<Elemente<def_type>> head;
+	std::shared_ptr<Elemente<def_type>> tail;
+	std::shared_ptr<Elemente<def_type>> currentElement;
+
+public:
 	LinkedList();
 	~LinkedList();
 
-	Elemente<def_type> *head;
-	Elemente<def_type> *tail;
-	private int index = 0; //for iteration
+
+	int index = 0; //for iteration
 
 	void append(def_type data)
 	{
 		if (head == nullptr) //if list is empty
 		{
-			head = std::make_unique<Elemente<def_type>>(); //creates a new node
-			head->setData(data);
+			head = std::make_shared<Elemente<def_type>>(); //creates a new node
+			head->data = data;
 			tail = head;
 		}
 		else
 		{
-			Elemente* buffer = std::make_unique<Elemente<def_type>>();
+			std::shared_ptr<Elemente<def_type>> buffer = std::make_shared<Elemente<def_type>>();
 			buffer->data = data;
 			buffer->next = nullptr;
+			buffer->prev = tail;
 			tail->next = buffer;
 			tail = buffer;
 			tail->next = nullptr;
 		}
+		index++;
 	}
-	public def_type TraverseForward(int index)
+	def_type TraverseForward(int index)
 	{
-		Elemente<def_type> CurrentElement = head;
+		currentElement = head;
 		for (int x = 0; x <= index; x++)
 		{
-			if (CurrentElement->next != nullptr)
+			if (currentElement->next != nullptr)
 			{
-				CurrentElement = CurrentElement->next;
+				currentElement = currentElement->next;
 			}
 		}
-		return CurrentElement->data;
+		return currentElement->data;
 	}
-	public def_type TraverseBackward(int index)
+	def_type TraverseBackward(int index)
 	{
-		Elemente<def_type> CurrentElement = tail;
+		currentElement = tail;
 		for (int x = 0; x < index; x++)
 		{
-			if (CurrentElement->prev != nullptr)
+			if (currentElement->prev != nullptr)
 			{
-				CurrentElement = CurrentElement->prev;
+				currentElement = currentElement->prev;
 			}
 		}
-		return CurrentElement->data;
+		return currentElement->data;
 	}
 
 
@@ -71,9 +78,9 @@ class LinkedList
 template<class def_type>
 inline LinkedList<def_type>::LinkedList()
 {
-	// no elemente/nodes in list
-	head = nullptr; 
-	tail = nullptr;
+	head = std::make_shared<Elemente<def_type>>();
+	tail = head;
+	head->next = nullptr;
 }
 
 template<class def_type>
