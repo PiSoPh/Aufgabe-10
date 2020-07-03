@@ -61,10 +61,10 @@ int main()
 	std::unique_ptr<LinkedList<std::string>> strList = std::make_unique<LinkedList<std::string>>();
 
 	strList->append("P");
-	strList->append("3");
+	strList->append("A");
 	strList->append("N");
-	strList->append("1");
-	strList->append("5");
+	strList->append("O");
+	strList->append("S");
 
 	std::cout << "\nForward Traverse:" << std::endl;
 
